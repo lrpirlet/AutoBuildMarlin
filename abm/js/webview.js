@@ -105,6 +105,11 @@ var ABM = (function(){
           $('#showy input[name="silent_build"]').prop('checked', m.silent);
           break;
 
+        case 'tree':
+          //console.log("Got tree data", m.data);
+          $('#debug-tree').jsonbrowser(m.data);
+          break;
+
         case 'envs':
           // Environments for building the current Configuration
           //
