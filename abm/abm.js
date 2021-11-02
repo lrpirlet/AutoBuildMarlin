@@ -264,11 +264,12 @@ function allFilesAreLoaded() {
       machine_info.name = def ? def.dequote() : '3D Printer';
     }
 
+    // Post values to the UI filling them in by ID
     const d = new Date(version_info.date);
+    postValue('date', d.toLocaleDateString([], { weekday:'long', year:'numeric', month:'short', day:'numeric' }));
 
     postValue('auth', version_info.auth);
     postValue('vers', version_info.vers);
-    postValue('date', d.toLocaleDateString([], { weekday:'long', year:'numeric', month:'short', day:'numeric' }));
 
     postValue('extruders', extruder_info.extruders);
     postValue('extruder-desc', extruder_info.description);
@@ -284,6 +285,7 @@ function allFilesAreLoaded() {
 
     postValue('archs', board_info.archs);
 
+    // Fill in the build status in the UI
     refreshBuildStatus();
   }
 
@@ -736,6 +738,7 @@ function run_command(action) {
   if (panel) {
     panel.reveal(vscode.ViewColumn.One);
     runSelectedAction();
+    //vw.showInformationMessage('ABM Action: ' + (action ? action : ''));
   }
   else {
 
@@ -803,6 +806,8 @@ function run_command(action) {
 
     // Create an IPC file for messages from Terminal
     createIPCFile();
+
+    //vw.showInformationMessage('ABM View Ready: ' + (action ? action : ''));
   }
   set_context('visible', true);
 }
