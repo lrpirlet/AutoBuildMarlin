@@ -642,11 +642,15 @@ function webViewContent() {
 
   var panes = {};
 
+  // Load Summary pane
+  panes.summary = load_pane('summ');
+
   // Load Geometry pane
   panes.geometry = load_pane('geom');
 
   // Load LCD pane
-  panes.lcd = load_pane('lcd');
+  const opt = '<option value="1">Test 123</option>';
+  panes.lcd = load_pane('lcd', { lcd_options: opt, check_label: "Check me!" });
 
   // Load SD pane
   panes.sd = load_pane('sd');
@@ -677,7 +681,7 @@ function handleWebViewMessage(m) {
 
     case 'conf':
       // On config section selection, re-populate the selected view
-      //vw.showInformationMessage('Config Tab: ' + m.tab);
+      vw.showInformationMessage('Config Tab: ' + m.tab);
       break;
 
     case 'warning':
@@ -736,7 +740,7 @@ function run_command(action) {
   else {
 
     panel = vw.createWebviewPanel(
-      'marlinConfig', 'Auto Build Marlin',
+      'marlinConfig', 'Auto Build',
       vscode.ViewColumn.One,
       {
         enableCommandUris: true,         // The view can accept commands?
